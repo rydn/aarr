@@ -1,0 +1,13 @@
+{
+    "name": "aarr"
+  , "version": "0.0.1"
+  , "description": "RSS fead reader, fuzzer and downloader for torrent feeds"
+  , "author": "Ryan Dick <noxinoobin@gmail.com>"
+  , "devDependencies": {
+        "mocha": ">= 0.14.1"
+      , "should": ">= 0.6.0"
+      , "glob": ">= 3.1.7"
+      , "hogan": ">= 1.0.5-dev"
+      , "dox": ">= 0.2.0"
+    }
+}
