@@ -29,12 +29,17 @@ build:
 	@cat public/js/bootstrap-transition.js public/js/bootstrap-alert.js public/js/bootstrap-button.js public/js/bootstrap-carousel.js public/js/bootstrap-collapse.js public/js/bootstrap-dropdown.js public/js/bootstrap-modal.js public/js/bootstrap-tooltip.js public/js/bootstrap-popover.js public/js/bootstrap-scrollspy.js public/js/bootstrap-tab.js public/js/bootstrap-typeahead.js > out/assets/js/bootstrap.js
 	@uglifyjs -nc out/assets/js/bootstrap.js > out/assets/js/bootstrap.min.js
 	@cat public/js/vendor/jquery.hashlisten/jquery.hashlisten.js > out/assets/js/vendor.js
+	@cat public/js/lib/*.js > out/assets/js/cs.js
 	@uglifyjs -nc out/assets/js/vendor.js > out/assets/js/vendor.min.js
+	@uglifyjs -nc out/assets/js/cs.js > out/assets/js/cs.min.js
 	@uglifyjs -nc public/js/vendor/jquery/dist/jquery.js > out/assets/js/jquery.min.js
 	@echo "Compiling and minifying javascript...       ${CHECK} Done"
+	@mkdir .tmp
+	@mkdir .tmp/jsmin
 	@mv out/assets/js/*.min.js .tmp/jsmin/
 	@rm -fr out/assets/js/*.js
 	@mv .tmp/jsmin/*.min.js out/assets/js/
+	@rm -fr .tmp/
 	@echo "Removing unminified javascript...	    ${CHECK} Done"
 	@echo "\n${HR}"
 	@echo "Successfully built at ${DATE}."
