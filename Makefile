@@ -22,15 +22,20 @@ build:
 	@node public/docs/build
 	@cp public/img/* out/assets/img/
 	@cp public/js/*.js out/assets/js/
+	@cp public/ico/* out/assets/ico/
+	@cp public/html/* out/
 	@rm out/assets/js/bootstrap-*
-	@cp public/js/tests/vendor/jquery.js out/assets/js/
 	@echo "Compiling documentation...                  ${CHECK} Done"
-	@cat public/js/bootstrap-transition.js public/js/bootstrap-alert.js public/js/bootstrap-button.js public/js/bootstrap-carousel.js public/js/bootstrap-collapse.js public/js/bootstrap-dropdown.js public/js/bootstrap-modal.js public/js/bootstrap-tooltip.js public/js/bootstrap-popover.js public/js/bootstrap-scrollspy.js public/js/bootstrap-tab.js public/js/bootstrap-typeahead.js > out/assets//js/bootstrap.js
-	@uglifyjs -nc out/assets//js/bootstrap.js > out/assets//js/bootstrap.min.tmp.js
-	@echo "/**\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > out/assets/js/copyright.js
-	@cat out/assets/js/copyright.js out/assets/js/bootstrap.min.tmp.js > out/assets/js/bootstrap.min.js
-	@rm out/assets/js/copyright.js out/assets/js/bootstrap.min.tmp.js
+	@cat public/js/bootstrap-transition.js public/js/bootstrap-alert.js public/js/bootstrap-button.js public/js/bootstrap-carousel.js public/js/bootstrap-collapse.js public/js/bootstrap-dropdown.js public/js/bootstrap-modal.js public/js/bootstrap-tooltip.js public/js/bootstrap-popover.js public/js/bootstrap-scrollspy.js public/js/bootstrap-tab.js public/js/bootstrap-typeahead.js > out/assets/js/bootstrap.js
+	@uglifyjs -nc out/assets/js/bootstrap.js > out/assets/js/bootstrap.min.js
+	@cat public/js/vendor/jquery.hashlisten/jquery.hashlisten.js > out/assets/js/vendor.js
+	@uglifyjs -nc out/assets/js/vendor.js > out/assets/js/vendor.min.js
+	@uglifyjs -nc public/js/jquery.js > out/assets/js/jquery.min.js
 	@echo "Compiling and minifying javascript...       ${CHECK} Done"
+	@mv out/assets/js/*.min.js .tmp/jsmin/
+	@rm -fr out/assets/js/*.js
+	@mv .tmp/jsmin/*.min.js out/assets/js/
+	@echo "Removing unminified javascript...	    ${CHECK} Done"
 	@echo "\n${HR}"
 	@echo "Successfully built at ${DATE}."
 	@echo "${HR}\n"
@@ -53,19 +58,20 @@ test:
 #
 
 bootstrap:
-	mkdir -p out/assets/bootstrap/img
-	mkdir -p out/assets/bootstrap/css
-	mkdir -p out/assets/bootstrap/js
-	cp public/img/* out/assets/bootstrap/img/
-	recess --compile ${BOOTSTRAP_LESS} > out/assets/bootstrap/css/bootstrap.css
-	recess --compress ${BOOTSTRAP_LESS} > out/assets/bootstrap/css/bootstrap.min.css
-	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > out/assets/bootstrap/css/bootstrap-responsive.css
-	recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > out/assets/bootstrap/css/bootstrap-responsive.min.css
-	cat public/js/bootstrap-transition.js public/js/bootstrap-alert.js public/js/bootstrap-button.js public/js/bootstrap-carousel.js public/js/bootstrap-collapse.js public/js/bootstrap-dropdown.js public/js/bootstrap-modal.js public/js/bootstrap-tooltip.js public/js/bootstrap-popover.js public/js/bootstrap-scrollspy.js public/js/bootstrap-tab.js public/js/bootstrap-typeahead.js > out/assets/bootstrap/js/bootstrap.js
-	uglifyjs -nc out/assets/bootstrap/js/bootstrap.js > out/assets/bootstrap/js/bootstrap.min.tmp.js
-	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > out/assets/bootstrap/js/copyright.js
-	cat out/assets/bootstrap/js/copyright.js out/assets/bootstrap/js/bootstrap.min.tmp.js > out/assets/bootstrap/js/bootstrap.min.js
-	rm out/assets/bootstrap/js/copyright.js out/assets/bootstrap/js/bootstrap.min.tmp.js
+	mkdir -p out/assets/img
+	mkdir -p out/assets/css
+	mkdir -p out/assets/js
+	mkdir -p out/assets/ico
+	cp public/img/* out/assets/img/
+	recess --compile ${BOOTSTRAP_LESS} > out/assets/css/bootstrap.css
+	recess --compress ${BOOTSTRAP_LESS} > out/assets/css/bootstrap.min.css
+	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > out/assets/css/bootstrap-responsive.css
+	recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > out/assets/css/bootstrap-responsive.min.css
+	cat public/js/bootstrap-transition.js public/js/bootstrap-alert.js public/js/bootstrap-button.js public/js/bootstrap-carousel.js public/js/bootstrap-collapse.js public/js/bootstrap-dropdown.js public/js/bootstrap-modal.js public/js/bootstrap-tooltip.js public/js/bootstrap-popover.js public/js/bootstrap-scrollspy.js public/js/bootstrap-tab.js public/js/bootstrap-typeahead.js > out/assets/js/bootstrap.js
+	uglifyjs -nc out/assets/js/bootstrap.js > out/assets/js/bootstrap.min.tmp.js
+	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > out/assets/js/copyright.js
+	cat out/assets/js/copyright.js out/assets/js/bootstrap.min.tmp.js > out/assets/js/bootstrap.min.js
+	rm out/assets/js/copyright.js out/assets/js/bootstrap.min.tmp.js
 
 #
 # MAKE FOR GH-PAGES 4 FAT & MDO ONLY (O_O  )

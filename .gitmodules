@@ -1,0 +1,6 @@
+[submodule "jquery"]
+	path = public/vendor/jquery
+	url = git://github.com/jquery/jquery.git
+[submodule "jquery.hashlisten"]
+	path = public/vendor/jquery.hashlisten
+	url = git://github.com/sinefunc/jquery.hashlisten.git
