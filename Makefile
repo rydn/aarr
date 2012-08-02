@@ -30,7 +30,7 @@ build:
 	@uglifyjs -nc out/assets/js/bootstrap.js > out/assets/js/bootstrap.min.js
 	@cat public/js/vendor/jquery.hashlisten/jquery.hashlisten.js > out/assets/js/vendor.js
 	@uglifyjs -nc out/assets/js/vendor.js > out/assets/js/vendor.min.js
-	@uglifyjs -nc public/js/jquery.js > out/assets/js/jquery.min.js
+	@uglifyjs -nc public/js/vendor/jquery/dist/jquery.js > out/assets/js/jquery.min.js
 	@echo "Compiling and minifying javascript...       ${CHECK} Done"
 	@mv out/assets/js/*.min.js .tmp/jsmin/
 	@rm -fr out/assets/js/*.js

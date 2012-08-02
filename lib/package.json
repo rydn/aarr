@@ -1,0 +1,12 @@
+{
+  "name": "aarr_server",
+  "version": "0.0.0",
+  "description": "RSS reader and organiser, for pirates, backend server",
+  "main": "app.js",
+  "scripts": {
+    "test": "node tests/test.js"
+  },
+  "repository": "",
+  "author": "Ryan Dick",
+  "license": "BSD"
+}
